@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Esquina RD, Gastrobar ubicado en el corazon de Constanza.</title>
+  <meta name="description" content="La Esquina Gastrobar, el Rock en español es nuestra ley, ubicados en el corazon de Constanza." />
+  <meta name="theme-color" content="#0f0f10" />
+  <link rel="icon" href="logo.avif" type="image/avif" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <style>
+    :root {
+      --bg: #0f0f10;
+      --bg-soft: #1a1b1d;
+      --text: #f5f5f5;
+      --muted: #c7c7c7;
+      --accent: #f4b942;
+      --line: #2b2d31;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, 92%); margin: 0 auto; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      padding: 14px 0;
+      background: linear-gradient(180deg, rgba(15, 15, 16, 0.92), rgba(15, 15, 16, 0.72));
+      backdrop-filter: blur(14px);
+    }
+    .nav-shell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(28, 29, 31, 0.96), rgba(16, 17, 19, 0.88));
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.24);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .brand img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .brand-text strong {
+      font-size: 0.98rem;
+      line-height: 1;
+    }
+    .brand-text span {
+      color: #a8adb5;
+      font-size: 0.78rem;
+      line-height: 1;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-left: auto;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .nav-link {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: #bfc3c8;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-1px);
+    }
+    .nav-cta {
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f4b942, #e8a92a);
+      color: #111;
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(244, 185, 66, 0.24);
+      white-space: nowrap;
+    }
+    .nav-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .hero {
+      min-height: 74vh;
+      position: relative;
+      display: grid;
+      place-items: center;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .hero video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15,15,16,.35), rgba(15,15,16,.85));
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 0;
+    }
+    h1, h2 { line-height: 1.15; margin: 0 0 16px; }
+    h1 { font-size: clamp(2rem, 5vw, 3.6rem); }
+    h2 { font-size: clamp(1.4rem, 3.5vw, 2.2rem); }
+    p { margin: 0 0 16px; color: var(--muted); }
+    .lead { font-size: clamp(1rem, 2.2vw, 1.2rem); max-width: 760px; margin: 0 auto 22px; }
+    .cta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--bg-soft);
+      color: var(--text);
+      font-weight: 600;
+    }
+    .btn.primary { background: var(--accent); color: #111; border-color: var(--accent); }
+
+    section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 26px;
+      align-items: center;
+    }
+    .card {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      object-fit: cover;
+      max-height: 360px;
+    }
+    .interactive-card {
+      perspective: 1200px;
+      overflow: hidden;
+    }
+    .interactive-frame {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      min-height: 360px;
+      transform-style: preserve-3d;
+      transition: transform 160ms ease-out;
+      background: #0c0c0d;
+    }
+    .interactive-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(255,255,255,.18), transparent 36%);
+      opacity: .55;
+      pointer-events: none;
+      transition: opacity 180ms ease;
+    }
+    .interactive-frame img {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      max-height: none;
+      object-fit: cover;
+      border: 0;
+      border-radius: 0;
+      transform: scale(1.08) translate3d(0, var(--image-shift, 0px), 0);
+      transition: transform 160ms ease-out;
+      will-change: transform;
+    }
+    .gallery-teaser {
+      background:
+        linear-gradient(135deg, rgba(244, 185, 66, 0.12), rgba(244, 185, 66, 0.03)),
+        linear-gradient(180deg, rgba(22, 23, 25, 0.92), rgba(15, 15, 16, 1));
+    }
+    .teaser-shell {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    .teaser-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .teaser-media {
+      position: relative;
+      overflow: hidden;
+      min-height: 320px;
+      background:
+        linear-gradient(180deg, rgba(10, 10, 11, 0.18), rgba(10, 10, 11, 0.82)),
+        url('Diseño sin título.png') center/cover;
+    }
+    .teaser-badge {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 185, 66, 0.24);
+      background: rgba(244, 185, 66, 0.08);
+      color: #f3cb79;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+    }
+    .teaser-overlay {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      padding: 18px;
+      border-radius: 16px;
+      background: rgba(10, 10, 11, 0.58);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+    }
+    .info-section {
+      background: linear-gradient(180deg, rgba(20, 21, 23, 0.96), rgba(15, 15, 16, 1));
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    .panel-title {
+      margin-bottom: 10px;
+    }
+    .meta-label {
+      font-size: 0.84rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #aeb4bc;
+      margin-bottom: 8px;
+    }
+    .link-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .link-list a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    footer { padding: 30px 0 50px; color: var(--muted); font-size: 0.95rem; }
+    .foot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .small { font-size: 0.92rem; }
+
+    @media (max-width: 860px) {
+      .grid, .foot-grid, .teaser-shell, .info-grid { grid-template-columns: 1fr; }
+      .site-header { padding: 10px 0; }
+      .nav-shell {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+      }
+      .nav-toggle { display: inline-flex; }
+      .nav-center {
+        grid-column: 1 / -1;
+        display: none;
+        width: 100%;
+        margin-left: 0;
+        flex-direction: column;
+        align-items: stretch;
+        padding-top: 10px;
+      }
+      .nav-shell.is-open .nav-center { display: flex; }
+      .nav-links {
+        width: 100%;
+        border-radius: 18px;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 8px;
+      }
+      .nav-link { text-align: center; }
+      .nav-cta { text-align: center; }
+      .interactive-frame,
+      .interactive-frame img { min-height: 280px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-shell" data-nav-shell>
+      <a class="brand" href="index.html">
+        <img src="logo.avif" alt="Logo La Esquina" />
+        <span class="brand-text">
+          <strong>La Esquina Gastrobar</strong>
+          <span>Constanza, RD</span>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Abrir menú" data-nav-toggle>
+        <span>Menu</span>
+      </button>
+      <div class="nav-center">
+        <nav class="nav-links" aria-label="Principal">
+          <a class="nav-link active" href="index.html">Home</a>
+          <a class="nav-link" href="galeria.html">Galeria</a>
+          <a class="nav-link" href="servicios.html">Servicios</a>
+          <a class="nav-link" href="nosotros.html">Nosotros</a>
+          <a class="nav-link" href="contacto.html">Contacto</a>
+        </nav>
+        <a class="nav-cta" href="menus.html">Ver Menu</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <video src="Animated_bar_with_202603172107.mp4" autoplay muted loop playsinline></video>
+    <div class="container hero-content">
+      <h1>La Esquina RD</h1>
+      <p class="lead">La Esquina Gastrobar, el Rock en español es nuestra ley, ubicados en el corazón de Constanza.</p>
+      <div class="cta">
+        <a class="btn" href="https://maps.app.goo.gl/XFKtuhLV4tUxcz1J7" target="_blank" rel="noopener noreferrer">Ver ubicacion</a>
+        <a class="btn primary" href="menus.html">Ver Menu</a>
+        <a class="btn" href="https://www.youtube.com/watch?v=xJbzHdjdutA" target="_blank" rel="noopener noreferrer">Ver Podcast Completo</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container grid">
+      <div class="card">
+        <h2>De un sueño familiar a un ícono de Constanza</h2>
+        <p>Ambiente familiar y relajado para compartir buena comida, buena música y una experiencia auténtica en el centro de Constanza.</p>
+        <p class="small">Horario: LUN - DOM, 12:00pm - 12:00am.</p>
+      </div>
+      <div class="card">
+        <img src="La-Esquina-Constanza-2.jpg" alt="Ambiente La Esquina Gastrobar" />
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container grid">
+      <div class="card">
+        <h2>Ver Podcast Completo</h2>
+        <p>La web original enlaza una pieza audiovisual oficial de la marca. Este bloque la conserva como parte del recorrido principal de la experiencia.</p>
+        <div class="cta" style="justify-content:flex-start;">
+          <a class="btn primary" href="https://www.youtube.com/watch?v=xJbzHdjdutA" target="_blank" rel="noopener noreferrer">Ver Podcast Completo</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="La-Esquina-Constanza-2.jpg" alt="Podcast y experiencia de La Esquina" />
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container grid">
+      <div class="card">
+        <img src="images.jpg" alt="Carta y experiencia en La Esquina" />
+      </div>
+      <div class="card">
+        <h2>Consulta nuestro Menu</h2>
+        <p>Explora las opciones gastronómicas y encuentra tus favoritos.</p>
+        <a class="btn primary" href="menus.html">Ver Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-teaser">
+    <div class="container teaser-shell">
+      <div class="card teaser-copy">
+        <span class="teaser-badge">Nueva pagina dedicada</span>
+        <h2>La galeria ahora tiene su propio espacio</h2>
+        <p>Movimos la sección a una página exclusiva para que la experiencia sea más completa, con mejor jerarquía visual y una presentación más cuidada de los momentos originales de La Esquina.</p>
+        <div class="cta">
+          <a class="btn primary" href="galeria.html">Entrar a la Galeria</a>
+          <a class="btn" href="https://www.laesquinard.com/copia-de-home" target="_blank" rel="noopener noreferrer">Ver fuente original</a>
+        </div>
+      </div>
+      <div class="card teaser-media">
+        <div class="teaser-overlay">
+          <strong>Revive nuestro 9.º Aniversario</strong>
+          <p class="small">Una de las colecciones destacadas de la galería original, ahora integrada dentro de una página dedicada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container grid">
+      <div class="card">
+        <h2>Descarga tu Guia Turistica de Constanza Completamente gratis</h2>
+        <p>Accede al recurso compartido por La Esquina para descubrir más de Constanza.</p>
+        <a class="btn" href="https://drive.google.com/file/d/1oEy5JtO3U1RZNZ7dLVjlcfKPFLmz2pri/view" target="_blank" rel="noopener noreferrer">Descargar</a>
+      </div>
+      <div class="card interactive-card">
+        <div class="interactive-frame" data-interactive-image>
+          <img src="foto inical.jpg" alt="Guía turística de Constanza" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <div class="container info-grid">
+      <div class="card">
+        <h2 class="panel-title">Contact Us</h2>
+
+        <div class="meta-label">Address</div>
+        <p>C. Miguel Andrés Abréu,<br />esquina Calle 27 de Febrero, Constanza, La Vega</p>
+
+        <div class="meta-label">Contact</div>
+        <p>809-539-1711<br />@laesquinard</p>
+
+        <div class="meta-label">Opening Hours</div>
+        <p>LUN - DOM<br />12:00pm - 12:00am</p>
+
+        <div class="cta" style="justify-content:flex-start;">
+          <a class="btn primary" href="tel:+18095391711">Llamar ahora</a>
+          <a class="btn" href="https://www.instagram.com/laesquinard" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="panel-title">Additional Links</h2>
+        <p>La versión nueva ya incorpora todas las rutas principales visibles en la web original y mantiene sus llamadas a la acción oficiales.</p>
+        <div class="link-list">
+          <a href="index.html"><span>Home</span><span>Ir</span></a>
+          <a href="galeria.html"><span>Galeria</span><span>Ir</span></a>
+          <a href="menus.html"><span>Menús</span><span>Ir</span></a>
+          <a href="https://maps.app.goo.gl/XFKtuhLV4tUxcz1J7" target="_blank" rel="noopener noreferrer"><span>Ver ubicacion</span><span>Abrir</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container foot-grid">
+      <div>
+        <strong>Dirección</strong>
+        <p class="small">C. Miguel Andrés Abréu, esquina Calle 27 de Febrero, Constanza, La Vega</p>
+      </div>
+      <div>
+        <strong>Contacto</strong>
+        <p class="small">809-539-1711<br />@laesquinard</p>
+      </div>
+      <div>
+        <strong>Sitio</strong>
+        <p class="small"><a href="https://www.laesquinard.com" target="_blank" rel="noopener noreferrer">www.laesquinard.com</a></p>
+      </div>
+    </div>
+  </footer>
+  <script>
+    (function() {
+      var navShell = document.querySelector('[data-nav-shell]');
+      var navToggle = document.querySelector('[data-nav-toggle]');
+      if (!navShell || !navToggle) return;
+
+      navToggle.addEventListener('click', function() {
+        var isOpen = navShell.classList.toggle('is-open');
+        navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    })();
+  </script>
+  <script>
+    (function() {
+      var frames = document.querySelectorAll('[data-interactive-image]');
+      if (!frames.length) return;
+
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function clamp(value, min, max) {
+        return Math.min(Math.max(value, min), max);
+      }
+
+      function updateScrollEffect() {
+        if (reducedMotion) return;
+
+        frames.forEach(function(frame) {
+          var rect = frame.getBoundingClientRect();
+          var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+          var progress = clamp((viewportHeight - rect.top) / (viewportHeight + rect.height), 0, 1);
+          var shift = (progress - 0.5) * 36;
+          frame.style.setProperty('--image-shift', shift.toFixed(2) + 'px');
+        });
+      }
+
+      frames.forEach(function(frame) {
+        frame.addEventListener('mousemove', function(event) {
+          if (reducedMotion) return;
+
+          var rect = frame.getBoundingClientRect();
+          var x = (event.clientX - rect.left) / rect.width;
+          var y = (event.clientY - rect.top) / rect.height;
+          var rotateY = (x - 0.5) * 14;
+          var rotateX = (0.5 - y) * 12;
+
+          frame.style.transform = 'rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg)';
+          frame.style.setProperty('--glow-x', (x * 100).toFixed(2) + '%');
+          frame.style.setProperty('--glow-y', (y * 100).toFixed(2) + '%');
+        });
+
+        frame.addEventListener('mouseleave', function() {
+          frame.style.transform = 'rotateX(0deg) rotateY(0deg)';
+          frame.style.setProperty('--glow-x', '50%');
+          frame.style.setProperty('--glow-y', '50%');
+        });
+      });
+
+      updateScrollEffect();
+      window.addEventListener('scroll', updateScrollEffect, { passive: true });
+      window.addEventListener('resize', updateScrollEffect);
+    })();
+  </script>
+</body>
+</html>

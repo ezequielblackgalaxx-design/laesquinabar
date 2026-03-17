@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menús | La Esquina Gastrobar</title>
+  <meta name="description" content="Menú visible de La Esquina Gastrobar extraído manualmente de la web original." />
+  <meta name="theme-color" content="#0f0f10" />
+  <link rel="icon" href="logo.avif" type="image/avif" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <style>
+    :root { --bg:#0f0f10; --bg-soft:#1a1b1d; --text:#f5f5f5; --muted:#c7c7c7; --accent:#f4b942; --line:#2b2d31; }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1160px,92%);margin:0 auto}
+    .site-header{position:sticky;top:0;z-index:40;padding:14px 0;background:linear-gradient(180deg,rgba(15,15,16,.92),rgba(15,15,16,.72));backdrop-filter:blur(14px)}
+    .nav-shell{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 16px;border:1px solid rgba(255,255,255,.08);border-radius:22px;background:linear-gradient(135deg,rgba(28,29,31,.96),rgba(16,17,19,.88));box-shadow:0 14px 40px rgba(0,0,0,.24)}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700;flex-shrink:0}
+    .brand img{width:44px;height:44px;object-fit:contain;border-radius:50%;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03)}
+    .brand-text{display:flex;flex-direction:column;gap:2px}.brand-text strong{font-size:.98rem;line-height:1}.brand-text span{color:#a8adb5;font-size:.78rem;line-height:1;letter-spacing:.06em;text-transform:uppercase}
+    .nav-center{display:flex;align-items:center;gap:14px;margin-left:auto}
+    .nav-links{display:flex;align-items:center;gap:8px;padding:6px;border:1px solid rgba(255,255,255,.06);border-radius:999px;background:rgba(255,255,255,.03)}
+    .nav-link{padding:10px 14px;border-radius:999px;color:#bfc3c8;transition:background .2s ease,color .2s ease,transform .2s ease}
+    .nav-link:hover,.nav-link.active{color:var(--text);background:rgba(255,255,255,.08);transform:translateY(-1px)}
+    .nav-cta{padding:11px 16px;border-radius:999px;background:linear-gradient(135deg,#f4b942,#e8a92a);color:#111;font-weight:700;box-shadow:0 10px 24px rgba(244,185,66,.24);white-space:nowrap}
+    .nav-toggle{display:none;align-items:center;justify-content:center;width:46px;height:46px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.03);color:var(--text);cursor:pointer;flex-shrink:0}
+
+    .hero{padding:48px 0 24px;border-bottom:1px solid var(--line)}
+    h1{font-size:clamp(2.1rem,4.6vw,3.6rem);margin:0 0 12px;line-height:1.08}
+    h2{font-size:clamp(1.35rem,2.6vw,2rem);margin:0 0 12px}
+    h3{font-size:1.02rem;margin:0}
+    p{color:var(--muted);line-height:1.6;margin:0 0 14px}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:stretch}
+    .card{background:var(--bg-soft);border:1px solid var(--line);border-radius:16px;padding:20px}
+    .badge{display:inline-flex;padding:8px 12px;border-radius:999px;border:1px solid rgba(244,185,66,.24);background:rgba(244,185,66,.09);color:#f2cd7d;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;margin-bottom:14px}
+    .cta{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{display:inline-block;padding:11px 16px;border-radius:999px;border:1px solid var(--line);background:#131416;color:var(--text);font-weight:600}
+    .btn.primary{background:var(--accent);border-color:var(--accent);color:#111}
+    .feature-beer{padding:10px 0 4px}
+    .feature-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:18px;align-items:stretch}
+    .feature-image{padding:12px;perspective:1200px;position:relative;overflow:hidden;animation:beerFloat 3.2s ease-in-out infinite,beerGlow 2.8s ease-in-out infinite;will-change:transform,filter;box-shadow:0 14px 34px rgba(244,185,66,.2)}
+    .feature-image::before{content:"";position:absolute;inset:8px;border-radius:14px;border:1px solid rgba(244,185,66,.45);pointer-events:none;opacity:.85;animation:beerPulse 2.2s ease-in-out infinite}
+    .feature-image::after{content:"";position:absolute;inset:-20% -30%;background:radial-gradient(circle at var(--shine-x,50%) var(--shine-y,50%), rgba(244,185,66,.24), transparent 38%);pointer-events:none;mix-blend-mode:screen;opacity:.85;animation:beerShine 2.8s ease-in-out infinite}
+    .feature-image img{width:100%;height:100%;max-height:460px;object-fit:cover;border-radius:12px;border:1px solid var(--line);will-change:transform,filter;transform-origin:center center;transform:rotateX(0deg) rotateY(0deg) scale(1.01);transition:transform .18s ease-out,filter .2s ease;animation:beerZoom 3s ease-in-out infinite}
+    .feature-image img:hover{filter:brightness(1.08) saturate(1.08)}
+    .feature-copy h2{margin-bottom:10px}
+    .feature-copy p{font-size:1rem;color:#d2d6dc}
+    .menu-wrap{padding:28px 0 56px}
+    .note{margin-bottom:16px;color:#d5b774}
+    .menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .menu-category{background:var(--bg-soft);border:1px solid var(--line);border-radius:16px;padding:18px}
+    .menu-category h2{margin-bottom:8px}
+    .menu-list{display:grid;gap:10px}
+    .menu-item{display:grid;grid-template-columns:1fr auto;gap:10px;padding:11px 0;border-bottom:1px dashed rgba(255,255,255,.12)}
+    .menu-item:last-child{border-bottom:0}
+    .desc{grid-column:1 / -1;color:#b8bdc5;font-size:.93rem;margin-top:-2px}
+    .price{font-weight:700;color:#f1f3f6;white-space:nowrap}
+    footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted)}
+
+    @keyframes beerFloat{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-14px)}
+    }
+    @keyframes beerGlow{
+      0%,100%{filter:drop-shadow(0 10px 18px rgba(244,185,66,.22))}
+      50%{filter:drop-shadow(0 16px 36px rgba(244,185,66,.42))}
+    }
+    @keyframes beerShine{
+      0%,100%{opacity:.55}
+      50%{opacity:.95}
+    }
+    @keyframes beerZoom{
+      0%,100%{transform:rotateX(0deg) rotateY(0deg) scale(1.01)}
+      50%{transform:rotateX(-1.5deg) rotateY(1.5deg) scale(1.045)}
+    }
+    @keyframes beerPulse{
+      0%,100%{opacity:.5;box-shadow:inset 0 0 0 0 rgba(244,185,66,.28),0 0 0 0 rgba(244,185,66,.2)}
+      50%{opacity:1;box-shadow:inset 0 0 0 2px rgba(244,185,66,.5),0 0 0 6px rgba(244,185,66,.15)}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .feature-image{animation:beerFloat 6s ease-in-out infinite,beerGlow 6s ease-in-out infinite}
+      .feature-image::before{animation:beerPulse 5.5s ease-in-out infinite}
+      .feature-image::after{animation:beerShine 5s ease-in-out infinite;opacity:.55}
+      .feature-image img{transition:transform .25s ease-out,filter .25s ease;animation:beerZoom 6.5s ease-in-out infinite;transform:scale(1.01)}
+    }
+
+    @media (max-width:980px){.hero-grid,.menu-grid,.feature-grid{grid-template-columns:1fr}}
+    @media (max-width:860px){
+      .site-header{padding:10px 0}
+      .nav-shell{display:grid;grid-template-columns:1fr auto;align-items:center}
+      .nav-toggle{display:inline-flex}
+      .nav-center{grid-column:1 / -1;display:none;width:100%;margin-left:0;flex-direction:column;align-items:stretch;padding-top:10px}
+      .nav-shell.is-open .nav-center{display:flex}
+      .nav-links{width:100%;border-radius:18px;flex-direction:column;align-items:stretch;padding:8px}
+      .nav-link,.nav-cta{text-align:center}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-shell" data-nav-shell>
+      <a class="brand" href="index.html">
+        <img src="logo.avif" alt="Logo La Esquina" />
+        <span class="brand-text"><strong>La Esquina Gastrobar</strong><span>Constanza, RD</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Abrir menú" data-nav-toggle><span>Menu</span></button>
+      <div class="nav-center">
+        <nav class="nav-links" aria-label="Principal">
+          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link" href="galeria.html">Galeria</a>
+          <a class="nav-link" href="servicios.html">Servicios</a>
+          <a class="nav-link" href="nosotros.html">Nosotros</a>
+          <a class="nav-link" href="contacto.html">Contacto</a>
+        </nav>
+        <a class="nav-cta" href="menus.html">Ver Menu</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <article class="card">
+          <span class="badge">Extracción manual</span>
+          <h1>Menu</h1>
+          <p>Esta página reúne el menú visible extraído manualmente de la web original de La Esquina. Se conservaron nombres, secciones, descripciones visibles y precios mostrados.</p>
+          <div class="cta">
+            <a class="btn primary" href="https://www.laesquinard.com/menus" target="_blank" rel="noopener noreferrer">Ver menu oficial en vivo</a>
+            <a class="btn" href="contacto.html">Consultar disponibilidad</a>
+          </div>
+        </article>
+        <article class="card">
+          <h2>Secciones visibles</h2>
+          <p>Entradas, Especial del día, Embutidos, Al Grill, Cortes Angus Importados, Hamburguesas, Pastas, Mofongos, Ensaladas/Wraps, Guarniciones, Caldos & Cremas y Postres.</p>
+          <p class="note">*Los precios no incluyen impuestos.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="feature-beer">
+      <div class="container feature-grid">
+        <article class="card feature-image" data-beer-tilt-wrap>
+          <img src="cerveza artesanal.png" alt="Cerveza artesanal Ferringer de La Esquina" data-beer-tilt />
+        </article>
+        <article class="card feature-copy">
+          <span class="badge">Estrella del local</span>
+          <h2>Cerveza artesanal Ferringer</h2>
+          <p>En el corazón del valle de Constanza nace una experiencia única: la cerveza artesanal Ferringer de La Esquina Gastrobar. Elaborada con pasión y tradición, esta cerveza captura la esencia de las montañas dominicanas. Su sabor equilibrado, su carácter artesanal y el ambiente bohemio del gastrobar la convierten en una de las cervezas más especiales que puedes disfrutar en Constanza. Cada sorbo es un homenaje al clima fresco, a la cultura local y al espíritu creativo de este hermoso destino.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="menu-wrap">
+      <div class="container">
+        <p class="note">*Los precios no incluyen impuestos</p>
+
+        <div class="menu-grid">
+          <article class="menu-category">
+            <h2>Entradas</h2>
+            <div class="menu-list">
+              <div class="menu-item"><h3>Servicio Croquetas Duende</h3><span class="price">RD$180</span><p class="desc">Deliciosas croquetas de queso y espinaca, una combinación exquisita.</p></div>
+              <div class="menu-item"><h3>Servicio Croquetas Chorizo</h3><span class="price">RD$180</span><p class="desc">Rellenas de chorizo español, textura cremosa e intenso sabor.</p></div>
+              <div class="menu-item"><h3>Servicio Croquetas Pollo</h3><span class="price">RD$180</span></div>
+              <div class="menu-item"><h3>Servicio Bastones de Mozzarella</h3><span class="price">RD$180</span></div>
+              <div class="menu-item"><h3>Servicio Croquetas Mixtas</h3><span class="price">RD$180</span><p class="desc">Croquetas de pollo, chorizo, duende y bastones de mozzarella.</p></div>
+              <div class="menu-item"><h3>Servicio Catibias de Pollo</h3><span class="price">RD$180</span></div>
+              <div class="menu-item"><h3>Servicio Catibias de Queso</h3><span class="price">RD$180</span></div>
+              <div class="menu-item"><h3>Servicio Catibias de Chorizo</h3><span class="price">RD$180</span></div>
+              <div class="menu-item"><h3>Servicio Catibias Mixtas</h3><span class="price">RD$180</span></div>
+              <div class="menu-item"><h3>Servicio Flautas de Pollo</h3><span class="price">RD$210</span></div>
+              <div class="menu-item"><h3>Lomo de cerdo a la sal</h3><span class="price">RD$195</span><p class="desc">Lomo de cerdo horneado a la sal macerado en aceite de oliva extra virgen.</p></div>
+            </div>
+          </article>
+
+          <article class="menu-category">
+            <h2>Especial del día</h2>
+            <div class="menu-list">
+              <div class="menu-item"><h3>Especial del día</h3><span class="price">Consultar</span><p class="desc">Sección visible en la web original sin detalle de platos en el extracto disponible.</p></div>
+            </div>
+          </article>
+
+          <article class="menu-category">
+            <h2>Embutidos</h2>
+            <div class="menu-list">
+              <div class="menu-item"><h3>Tabla de Queso Manchego</h3><span class="price">RD$250</span></div>
+              <div class="menu-item"><h3>Tabla de Jamón Serrano</h3><span class="price">RD$290</span></div>
+              <div class="menu-item"><h3>Tabla de Embutidos</h3><span class="price">RD$305</span></div>
+              <div class="menu-item"><h3>Provoleta</h3><span class="price">RD$275</span></div>
+            </div>
+          </article>
+
+          <article class="menu-category">
+            <h2>Al Grill</h2>
+            <div class="menu-list">
+              <div class="menu-item"><h3>Salchichas Alemanas</h3><span class="price">RD$350</span></div>
+              <div class="menu-item"><h3>Pechugas a la Plancha</h3><span class="price">RD$390</span></div>
+              <div class="menu-item"><h3>Pechuga a la Cordon Bleu</h3><span class="price">RD$590</span></div>
+              <div class="menu-item"><h3>Chuletas a la Parrilla</h3><span class="price">RD$390</span></div>
+              <div class="menu-item"><h3>Filete de Cerdo</h3><span class="price">RD$500</span></div>
+              <div class="menu-item"><h3>Costillas a la Parrilla</h3><span class="price">RD$590</span></div>
+              <div class="menu-item"><h3>Mero a la Plancha</h3><span class="price">RD$390</span></div>
+              <div class="menu-item"><h3>Salmón a la Plancha</h3><span class="price">RD$650</span></div>
+              <div class="menu-item"><h3>Gambas al Ajillo</h3><span class="price">RD$750</span></div>
+              <div class="menu-item"><h3>Camarones al Grill</h3><span class="price">RD$500</span></div>
+              <div class="menu-item"><h3>Parrillada Mixta de 2 a 3</h3><span class="price">RD$1,150</span></div>
+              <div class="menu-item"><h3>Parrillada Mixta de 3 a 4</h3><span class="price">RD$1,750</span></div>
+              <div class="menu-item"><h3>Parrillada Mixta de 4 a 5</h3><span class="price">RD$2,350</span></div>
+              <div class="menu-item"><h3>Parrillada Mixta de 5 a 6</h3><span class="price">RD$2,850</span></div>
+              <div class="menu-item"><h3>Bandeja Criolla</h3><span class="price">RD$750</span></div>
+              <div class="menu-item"><h3>Longaniza Casera</h3><span class="price">RD$390</span></div>
+            </div>
+          </article>
+
+          <article class="menu-category">
+            <h2>Cortes Angus Importados</h2>
+            <div class="menu-list">
+              <div class="menu-item"><h3>Churrasco Angus 8 oz</h3><span class="price">RD$1,100</span><p class="desc">Churrasco 8 oz a la parrilla.</p></div>
+              <div class="menu-item"><h3>Flap Meat 8oz</h3><span class="price">RD$900</span></div>
+              <div class="menu-item"><h3>Picaña Angus 16 - 18 oz</h3><span class="price">RD$1,100</span></div>
+              <div class="menu-item"><h3>Rib Eye 14 - 16 OZ</h3><span class="price">RD$1,450</span></div>
+            </div>
+          </article>
+
+          <article class="menu-category">
+            <h2>Hamburguesas</h2>
+            <div class="menu-list">
+              <div class="menu-item"><h3>Hamburguesa de pechuga de pollo</h3><span class="price">RD$350</span><p class="desc">Con queso cheddar, lechuga y tomate.</p></div>
+              <div class="menu-item"><h3>Hamburguesa Smash Doble Clásica</h3><span class="price">RD$350</span><p class="desc">Dos piezas de carne 100% res al estilo smash.</p></div>
+              <div class="menu-item"><h3>Hamburguesa Smash Con Cebolla (Oklahoma)</h3><span class="price">RD$375</span><p class="desc">Smash con cebolla finamente rebanada cocida en plancha.</p></div>
+              <div class="menu-item"><h3>Hamburguesa de Pollo Crispy</h3><span class="price">RD$390</span><p class="desc">Crujiente por fuera, jugosa por dentro.</p></div>
+            </div>
+          </article>
+
+          <article class="menu-category">
+            <h2>Pastas</h2>
+            <div class="menu-list">
+              <div class="menu-item"><h3>Pasta Pomodoro</h3><span class="price">RD$250</span></div>
+              <div class="menu-item"><h3>Pasta Bechamel</h3><span class="price">RD$250</span></div>
+              <div class="menu-item"><h3>Pasta de Pollo</h3><span class="price">RD$400</span></div>
+              <div class="menu-item"><h3>Pasta de Camarones</h3><span class="price">RD$550</span></div>
+              <div class="menu-item"><h3>Boloñesa</h3><span class="price">RD$450</span></div>
+            </div>
+          </article>
+
+          <article class="menu-category">
+            <h2>Mofongos</h2>
+            <div class="menu-list">
+              <div class="menu-item"><h3>Mofongo</h3><span class="price">RD$390</span></div>
+              <div class="menu-item"><h3>Mofongo Mixto</h3><span class="price">RD$490</span></div>
+              <div class="menu-item"><h3>Mofongo de Camarones</h3><span class="price">RD$750</span></div>
+            </div>
+          </article>
+
+          <article class="menu-category">
+            <h2>Ensaladas, Wraps & Mas.</h2>
+            <div class="menu-list">
+              <div class="menu-item"><h3>Ensalada Fresca</h3><span class="price">RD$140</span></div>
+              <div class="menu-item"><h3>Ensalada de Pollo</h3><span class="price">RD$350</span></div>
+              <div class="menu-item"><h3>Tortilla Española</h3><span class="price">RD$300</span></div>
+              <div class="menu-item"><h3>Wraps Angus</h3><span class="price">RD$350</span></div>
+              <div class="menu-item"><h3>Wraps Pollo</h3><span class="price">RD$350</span></div>
+              <div class="menu-item"><h3>Wraps de Camarones</h3><span class="price">RD$450</span></div>
+              <div class="menu-item"><h3>Wraps de Vegetales</h3><span class="price">RD$250</span></div>
+            </div>
+          </article>
+
+          <article class="menu-category">
+            <h2>Guarniciones</h2>
+            <div class="menu-list">
+              <div class="menu-item"><h3>Arroz Blanco & Habichuelas</h3><span class="price">RD$125</span></div>
+              <div class="menu-item"><h3>Casabe</h3><span class="price">RD$70</span></div>
+              <div class="menu-item"><h3>Pan Fresco</h3><span class="price">N/D</span></div>
+              <div class="menu-item"><h3>Tostones</h3><span class="price">N/D</span></div>
+              <div class="menu-item"><h3>Papas Wedge</h3><span class="price">RD$75</span></div>
+              <div class="menu-item"><h3>Papas Fritas</h3><span class="price">N/D</span></div>
+              <div class="menu-item"><h3>Papas Salteadas</h3><span class="price">RD$110</span></div>
+              <div class="menu-item"><h3>Pure de Papas</h3><span class="price">RD$90</span></div>
+              <div class="menu-item"><h3>Vegetales al Grill</h3><span class="price">RD$120</span></div>
+            </div>
+          </article>
+
+          <article class="menu-category">
+            <h2>Caldos & Cremas</h2>
+            <div class="menu-list">
+              <div class="menu-item"><h3>Crema de Auyama</h3><span class="price">RD$220</span></div>
+              <div class="menu-item"><h3>Sopa</h3><span class="price">RD$200</span></div>
+              <div class="menu-item"><h3>Caldo Montañez</h3><span class="price">RD$350</span><p class="desc">Caldo casero con cerdo, pollo, salchichas y alubias.</p></div>
+            </div>
+          </article>
+
+          <article class="menu-category">
+            <h2>Postres</h2>
+            <div class="menu-list">
+              <div class="menu-item"><h3>Cortado de leche</h3><span class="price">RD$160</span></div>
+              <div class="menu-item"><h3>Tarta de Queso Vasca</h3><span class="price">RD$195</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">La Esquina RD · C. Miguel Andrés Abréu, esquina Calle 27 de Febrero, Constanza, La Vega · 809-539-1711</div>
+  </footer>
+
+  <script>
+    (function() {
+      var navShell = document.querySelector('[data-nav-shell]');
+      var navToggle = document.querySelector('[data-nav-toggle]');
+      if (!navShell || !navToggle) return;
+
+      navToggle.addEventListener('click', function() {
+        var isOpen = navShell.classList.toggle('is-open');
+        navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    })();
+  </script>
+  <script>
+    (function() {
+      var wrap = document.querySelector('[data-beer-tilt-wrap]');
+      var image = document.querySelector('[data-beer-tilt]');
+      if (!wrap || !image) return;
+
+      function resetTilt() {
+        image.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1.01)';
+        image.style.filter = 'brightness(1) saturate(1)';
+      }
+
+      function onPointerMove(event) {
+        var rect = wrap.getBoundingClientRect();
+        var px = (event.clientX - rect.left) / rect.width;
+        var py = (event.clientY - rect.top) / rect.height;
+        var rotateY = (px - 0.5) * 16;
+        var rotateX = (0.5 - py) * 14;
+        image.style.transform = 'rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg) scale(1.03)';
+        image.style.filter = 'brightness(1.08) saturate(1.1)';
+        wrap.style.setProperty('--shine-x', (px * 100).toFixed(2) + '%');
+        wrap.style.setProperty('--shine-y', (py * 100).toFixed(2) + '%');
+      }
+
+      wrap.addEventListener('mousemove', onPointerMove);
+      wrap.addEventListener('pointermove', onPointerMove);
+
+      wrap.addEventListener('mouseleave', resetTilt);
+      wrap.addEventListener('blur', resetTilt, true);
+    })();
+  </script>
+</body>
+</html>
